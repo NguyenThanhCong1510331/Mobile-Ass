@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "461294055252",
+    "firebase_url": "https://moblieass-ptud.firebaseio.com",
+    "project_id": "moblieass-ptud",
+    "storage_bucket": "moblieass-ptud.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461294055252:android:f3b205bb882842b4",
+        "android_client_info": {
+          "package_name": "com.example.soundloneteamcomp.chitchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "461294055252-a9dsf1nn5n934dofgsv4nhf5q9kjcm0s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.soundloneteamcomp.chitchat",
+            "certificate_hash": "4ad8510652086c56772b9a07ec64ecc9eeac5422"
+          }
+        },
+        {
+          "client_id": "461294055252-t44aahatale3odlbki0juupfd8vgedbg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAlMCOmLfBkjMKV5kI0isJVcl8crC4I2g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "461294055252-t44aahatale3odlbki0juupfd8vgedbg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background"
+    tools:context="com.example.soundloneteamcomp.chitchat.Sign_upActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:fontFamily="Roboto"
+            android:gravity="center"
+            android:text="Create An Account"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColor="#FF1C3CFE"
+            android:textSize="30sp"
+            tools:ignore="RtlSymmetry" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:background="@drawable/ic_star_sign_up" />
+
+            <EditText
+                android:id="@+id/EditText_SignUpFirstName"
+                android:layout_width="330sp"
+                android:layout_height="35sp"
+                android:layout_marginStart="5sp"
+                android:background="@drawable/line"
+                android:fontFamily="Roboto"
+                android:hint="First name"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="#202020"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:background="@drawable/ic_star_sign_up" />
+
+            <EditText
+                android:id="@+id/EditText_SignUpLastName"
+                android:layout_width="330sp"
+                android:layout_height="35sp"
+                android:layout_marginStart="5sp"
+                android:background="@drawable/line"
+                android:fontFamily="Roboto"
+                android:hint="Last name"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="#202020"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:background="@drawable/ic_star_sign_up" />
+
+            <EditText
+                android:id="@+id/EditText_SignUpUserName"
+                android:layout_width="330sp"
+                android:layout_height="35sp"
+                android:layout_marginStart="5sp"
+                android:background="@drawable/line"
+                android:fontFamily="Roboto"
+                android:hint="Username"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="#202020"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:background="@drawable/ic_star_sign_up" />
+
+            <EditText
+                android:id="@+id/EditText_SignUpPassword"
+                android:layout_width="330sp"
+                android:layout_height="35sp"
+                android:layout_marginStart="5sp"
+                android:background="@drawable/line"
+                android:fontFamily="Roboto"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="#202020"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:background="@drawable/ic_star_sign_up" />
+
+            <EditText
+                android:id="@+id/EditText_SignUpConfirmPassword"
+                android:layout_width="330sp"
+                android:layout_height="35sp"
+                android:layout_marginStart="5sp"
+                android:background="@drawable/line"
+                android:fontFamily="Roboto"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="#202020"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35sp"
+            android:fontFamily="Roboto"
+            android:gravity="center"
+            android:text="Day of Birth"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            tools:ignore="RtlSymmetry" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseCompoundDrawables">
+            <Spinner
+                android:layout_width="100sp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20sp" />
+
+            <Spinner
+                android:layout_width="100sp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20sp" />
+            <Spinner
+                android:layout_width="100sp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:textColor="#000000"
+                android:textSize="20sp"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="50sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                android:textColor="#000000"
+                android:textSize="20sp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:background="@drawable/ic_star_sign_up" />
+
+            <EditText
+                android:id="@+id/EditText_SignUpEmail"
+                android:layout_width="330sp"
+                android:layout_height="35sp"
+                android:layout_marginStart="5sp"
+                android:background="@drawable/line"
+                android:fontFamily="Roboto"
+                android:hint="Email"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="#202020"
+                android:textSize="20sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/EditText_SignUpPhone"
+                android:layout_width="330sp"
+                android:layout_height="35sp"
+                android:layout_marginStart="20sp"
+                android:background="@drawable/line"
+                android:fontFamily="Roboto"
+                android:hint="Phone"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="#202020"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/EditText_SignUpAddress"
+                android:layout_width="330sp"
+                android:layout_height="35sp"
+                android:layout_marginStart="20sp"
+                android:background="@drawable/line"
+                android:fontFamily="Roboto"
+                android:hint="Address"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="#202020"
+                android:textSize="20sp" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/button_SignUp"
+            android:layout_width="158sp"
+            android:layout_height="50sp"
+            android:layout_marginTop="10sp"
+            android:background="@drawable/button"
+            android:fontFamily="Roboto"
+            android:text="@string/sign_up"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="70sp"
+                android:layout_marginEnd="5sp"
+                android:fontFamily="Roboto"
+                android:text="Already have an account?"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="#202020"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/TextView_SignIn"
+                android:layout_width="83dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="50sp"
+                android:fontFamily="Roboto"
+                android:text="@string/sign_in"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="#FF1C3CFE"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
