@@ -1,68 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/background"
-    android:theme="@style/Theme.AppCompat.NoActionBar"
-    tools:context="com.example.soundloneteamcomp.chitchat.ChatActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/setmeeting_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/button_BackChat"
             android:layout_width="match_parent"
-            android:layout_height="60sp"
+            android:layout_height="wrap_content"
             android:background="@drawable/button_v2"
             android:drawableStart="@drawable/ic_keyboard_arrow_left"
             android:fontFamily="Roboto"
-            android:paddingEnd="40sp"
+            android:paddingEnd="30sp"
             android:text="@string/user_s_name"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="#FFC8D0FF"
             android:textColorHighlight="#FFC8D0FF"
-            android:textSize="30sp"
-            tools:ignore="RtlSymmetry" />
+            android:textSize="30sp" />
+
         <Button
+            android:id="@+id/btn_set_appointment"
             android:layout_width="40sp"
             android:layout_height="40sp"
-            android:background="@drawable/ic_setting_meeting"
-            android:layout_marginStart="300sp"
-            android:layout_marginTop="12sp"
-            />
-        </RelativeLayout>
+            android:layout_marginStart="310sp"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/ic_setting_meeting" />
+    </RelativeLayout>
 
-        <ScrollView
-            android:id="@+id/scroolView_Chat"
-            android:layout_width="match_parent"
-            android:layout_height="455sp"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:background="@drawable/input_text_chat"
-            android:textSize="15sp"
-            android:inputType="text"
-            android:paddingStart="5sp"
-            android:hint="@string/type_message_here_Chat"
-            tools:ignore="RtlSymmetry" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/appointment"
+        android:layout_below="@id/setmeeting_bar">
+
+        <TextView
+            android:id="@+id/appoint_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="30dp"
+            android:text="Name"
+            android:textColor="#FFFFFFFF"/>
+
+        <TextView
+            android:id="@+id/appoint_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="70dp"
+            android:text="Date"
+            android:textColor="#FFFFFFFF"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp"
+            android:background="@mipmap/calendar"/>
+
+        <TextView
+            android:id="@+id/appoint_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="70dp"
+            android:text="Time"
+            android:textColor="#FFFFFFFF"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp"
+            android:background="@mipmap/clock"/>
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyler_list_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="90dp"
+        android:layout_above="@id/edtxt_Chat">
+    </android.support.v7.widget.RecyclerView>
+
+    <EditText
+        android:id="@+id/edtxt_Chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:background="@drawable/input_text_chat"
+        android:hint="@string/type_message_here_Chat"
+        android:inputType="text"
+        android:textColor="#FF09090A"
+        android:textColorHint="#FF9094AC"
+        android:imeOptions="actionSend"
+        android:maxLines="1"
+        android:padding="8dp"/>
+
+</RelativeLayout>

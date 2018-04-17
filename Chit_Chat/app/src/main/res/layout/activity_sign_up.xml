@@ -9,14 +9,18 @@
     tools:context="com.example.soundloneteamcomp.chitchat.Sign_upActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:layout_width="match_parent"
@@ -181,7 +185,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="35sp"
+            android:layout_height="30sp"
             android:fontFamily="Roboto"
             android:gravity="center"
             android:text="Day of Birth"
@@ -189,9 +193,10 @@
             android:textColor="#000000"
             android:textSize="20sp"
             tools:ignore="RtlSymmetry" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="30sp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -199,22 +204,34 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UseCompoundDrawables">
-            <Spinner
-                android:layout_width="100sp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="20sp" />
 
-            <Spinner
-                android:layout_width="100sp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="20sp" />
-            <Spinner
-                android:layout_width="100sp"
-                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/DatePicker_SignUp"
+                android:hint="Choose date"
+                android:textSize="20sp"
+                android:textColor="#202020"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--            <Spinner
+                            android:layout_width="100sp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="20sp" />
+
+
+                        <Spinner
+                            android:layout_width="100sp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="20sp" />
+
+                        <Spinner
+                            android:layout_width="100sp"
+                            android:layout_height="match_parent" />-->
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="30sp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -223,26 +240,41 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UseCompoundDrawables">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Male"
-                android:textColor="#000000"
-                android:textSize="20sp"/>
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:id="@+id/radioGroupSex_SignUp">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="50sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Female"
-                android:textColor="#000000"
-                android:textSize="20sp"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:id="@+id/radioMale_SignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/male"
+                    android:textSize="20sp"
+                    android:buttonTint="@color/blue" />
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Female"-->
+                <!--android:textColor="#000000"-->
+                <!--android:textSize="20sp" />-->
+
+                <RadioButton
+                    android:id="@+id/radioFemale_SignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100sp"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/female"
+                    android:textSize="20sp"
+                    android:buttonTint="@color/blue"  />
+
+            </RadioGroup>
+
         </LinearLayout>
 
         <LinearLayout
@@ -273,6 +305,7 @@
                 android:textColor="#202020"
                 android:textSize="20sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -322,6 +355,7 @@
                 android:textColor="#202020"
                 android:textSize="20sp" />
         </LinearLayout>
+
         <Button
             android:id="@+id/button_SignUp"
             android:layout_width="158sp"
@@ -348,8 +382,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginStart="70sp"
                 android:layout_marginEnd="5sp"
+                android:layout_marginStart="70sp"
                 android:fontFamily="Roboto"
                 android:text="Already have an account?"
                 android:textAppearance="@style/TextAppearance.AppCompat"

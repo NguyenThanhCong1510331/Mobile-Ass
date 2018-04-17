@@ -27,7 +27,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.SLT.chatloca.MapsActivity" />
+        tools:context="com.example.group_32.chatloca.MapsActivity" />
 
     <LinearLayout
         android:layout_width="wrap_content"
