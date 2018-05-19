@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background"
-    tools:context="com.example.soundloneteamcomp.chitchat.Sign_upActivity">
+    tools:context="com.example.group_32.chatloca.activities.Sign_upActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,6 +55,7 @@
                 android:layout_height="35sp"
                 android:layout_marginStart="5sp"
                 android:background="@drawable/line"
+                android:textCursorDrawable="@null"
                 android:fontFamily="Roboto"
                 android:hint="First name"
                 android:inputType="text"
@@ -85,6 +86,7 @@
                 android:layout_height="35sp"
                 android:layout_marginStart="5sp"
                 android:background="@drawable/line"
+                android:textCursorDrawable="@null"
                 android:fontFamily="Roboto"
                 android:hint="Last name"
                 android:inputType="text"
@@ -114,6 +116,7 @@
                 android:layout_width="330sp"
                 android:layout_height="35sp"
                 android:layout_marginStart="5sp"
+                android:textCursorDrawable="@null"
                 android:background="@drawable/line"
                 android:fontFamily="Roboto"
                 android:hint="Username"
@@ -145,6 +148,7 @@
                 android:layout_height="35sp"
                 android:layout_marginStart="5sp"
                 android:background="@drawable/line"
+                android:textCursorDrawable="@null"
                 android:fontFamily="Roboto"
                 android:hint="Password"
                 android:inputType="textPassword"
@@ -152,7 +156,6 @@
                 android:textColor="#202020"
                 android:textSize="20sp" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -176,6 +179,7 @@
                 android:layout_marginStart="5sp"
                 android:background="@drawable/line"
                 android:fontFamily="Roboto"
+                android:textCursorDrawable="@null"
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:singleLine="true"
@@ -183,51 +187,44 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30sp"
-            android:fontFamily="Roboto"
-            android:gravity="center"
-            android:text="Day of Birth"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            tools:ignore="RtlSymmetry" />
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30sp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="UseCompoundDrawables">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="Roboto"
+                android:gravity="center"
+                android:text="Day of Birth: "
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/DatePicker_SignUp"
-                android:hint="Choose date"
                 android:textSize="20sp"
                 android:textColor="#202020"
+                android:layout_marginLeft="20sp"
+                android:hint="dd/mm/yy"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:id="@+id/ic_day_of_birth"
+                android:src="@drawable/ic_day_of_birth"/>
 
-            <!--            <Spinner
-                            android:layout_width="100sp"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="20sp" />
 
 
-                        <Spinner
-                            android:layout_width="100sp"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="20sp" />
-
-                        <Spinner
-                            android:layout_width="100sp"
-                            android:layout_height="match_parent" />-->
         </LinearLayout>
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -274,8 +271,7 @@
                     android:buttonTint="@color/blue"  />
 
             </RadioGroup>
-
-        </LinearLayout>
+            </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -298,9 +294,10 @@
                 android:layout_height="35sp"
                 android:layout_marginStart="5sp"
                 android:background="@drawable/line"
+                android:textCursorDrawable="@null"
                 android:fontFamily="Roboto"
                 android:hint="Email"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:textColor="#202020"
                 android:textSize="20sp" />
@@ -321,6 +318,7 @@
                 android:id="@+id/EditText_SignUpPhone"
                 android:layout_width="330sp"
                 android:layout_height="35sp"
+                android:textCursorDrawable="@null"
                 android:layout_marginStart="20sp"
                 android:background="@drawable/line"
                 android:fontFamily="Roboto"
@@ -348,6 +346,7 @@
                 android:layout_height="35sp"
                 android:layout_marginStart="20sp"
                 android:background="@drawable/line"
+                android:textCursorDrawable="@null"
                 android:fontFamily="Roboto"
                 android:hint="Address"
                 android:inputType="text"
@@ -355,7 +354,6 @@
                 android:textColor="#202020"
                 android:textSize="20sp" />
         </LinearLayout>
-
         <Button
             android:id="@+id/button_SignUp"
             android:layout_width="158sp"

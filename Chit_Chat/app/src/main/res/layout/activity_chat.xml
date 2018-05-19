@@ -29,7 +29,7 @@
             android:id="@+id/btn_set_appointment"
             android:layout_width="40sp"
             android:layout_height="40sp"
-            android:layout_marginStart="310sp"
+            android:layout_marginStart="300sp"
             android:layout_marginTop="5sp"
             android:background="@drawable/ic_setting_meeting" />
     </RelativeLayout>
@@ -42,41 +42,47 @@
 
         <TextView
             android:id="@+id/appoint_name"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:layout_marginStart="30dp"
             android:text="Name"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textColor="#FFFFFFFF"/>
 
         <TextView
             android:id="@+id/appoint_date"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="30dp"
             android:text="Date"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textColor="#FFFFFFFF"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginStart="15dp"
             android:background="@mipmap/calendar"/>
 
         <TextView
             android:id="@+id/appoint_time"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="30dp"
             android:text="Time"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textColor="#FFFFFFFF"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginStart="15dp"
             android:background="@mipmap/clock"/>
