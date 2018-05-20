@@ -547,8 +547,8 @@ public class ChatActivity extends AppCompatActivity {
                         rootRef.child("meeting").child(messageReceiverId + messageSenderId).child("longitude").setValue(longitude);
                         rootRef.child("meeting").child(messageSenderId + messageReceiverId).child("latitude").setValue(latitude);
                         rootRef.child("meeting").child(messageReceiverId + messageSenderId).child("latitude").setValue(latitude);
-                        rootRef.child("meeting").child(messageSenderId + messageReceiverId).child("address").setValue(address);
-                        rootRef.child("meeting").child(messageReceiverId + messageSenderId).child("address").setValue(address);
+                        /*rootRef.child("meeting").child(messageSenderId + messageReceiverId).child("address").setValue(address);
+                        rootRef.child("meeting").child(messageReceiverId + messageSenderId).child("address").setValue(address);*/
                         rootRef.child("meeting").child(messageSenderId + messageReceiverId).child("latLng").child("longitude").setValue(longitude);
                         rootRef.child("meeting").child(messageSenderId + messageReceiverId).child("latLng").child("latitude").setValue(latitude);
                         rootRef.child("meeting").child(messageReceiverId + messageSenderId).child("latLng").child("longitude").setValue(longitude);
@@ -558,7 +558,7 @@ public class ChatActivity extends AppCompatActivity {
                         rootRef.child("meeting").child(messageReceiverId).child("latitude").setValue(latitude);
                         rootRef.child("meeting").child(messageReceiverId).child("latLng").child("longitude").setValue(longitude);
                         rootRef.child("meeting").child(messageReceiverId).child("latLng").child("latitude").setValue(latitude);
-                        rootRef.child("meeting").child(messageSenderId).child("address").setValue(address);
+                        //rootRef.child("meeting").child(messageSenderId).child("address").setValue(address);
                     }
                 }
                 myDialog.dismiss();
