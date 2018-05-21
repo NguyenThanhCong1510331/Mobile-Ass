@@ -12,23 +12,12 @@ public class Conversation { //SOMETHING to merge here: userid -> getdata, store 
     private String userIdCreated; // << DAT>>
     private Long timeCreated;
     private String conversationName;
-
-
-    public Conversation(String userIdCreated, String nameOfMeeting, String date, String time, Double longtitude, Double latitude) {
-        this.userIdCreated = userIdCreated;
-        this.nameOfMeeting = nameOfMeeting;
-        this.date = date;
-        this.time = time;
-        this.longtitude = longtitude;
-        this.latitude = latitude;
-    }
-
     private String nameOfMeeting;
     private String date;
     private String time;
     private Map<String, String> listMember;
     private Map<Messages, Object> listMessage;
-    private Double longtitude;
+    private Double longitude;
     private Double latitude;
     private String type;
     //private User[] listmember;
@@ -36,8 +25,15 @@ public class Conversation { //SOMETHING to merge here: userid -> getdata, store 
     public Conversation() {
     }
 
-//    private Meeting[] listMeeting;
-
+    //    private Meeting[] listMeeting;
+    public Conversation(String userIdCreated, String nameOfMeeting, String date, String time, Double longitude, Double latitude) {
+        this.userIdCreated = userIdCreated;
+        this.nameOfMeeting = nameOfMeeting;
+        this.date = date;
+        this.time = time;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 
     public Conversation(String userIdCreated, Long timeCreated, String conversationName, Map<String, String> listMember, Map<Messages, Object> listMessage) {
         this.userIdCreated = userIdCreated;
@@ -47,12 +43,12 @@ public class Conversation { //SOMETHING to merge here: userid -> getdata, store 
         this.listMessage = listMessage;
     }
 
-    public Double getLongtitude() {
-        return longtitude;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setLongtitude(Double longtitude) {
-        this.longtitude = longtitude;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public Double getLatitude() {
@@ -65,13 +61,13 @@ public class Conversation { //SOMETHING to merge here: userid -> getdata, store 
 
     /*
 
-        public Conversation(String userIdCreated, Long timeCreated, String conversationName, Map<String, String> listMember, Double longtitude, Double latitude) {
+        public Conversation(String userIdCreated, Long timeCreated, String conversationName, Map<String, String> listMember, Double longitude, Double latitude) {
 
             this.userIdCreated = userIdCreated;
             this.timeCreated = timeCreated;
             this.conversationName = conversationName;
             this.listMember = listMember;
-            this.longtitude = longtitude;
+            this.longitude = longitude;
             this.latitude = latitude;
         }
     */
@@ -83,7 +79,7 @@ public class Conversation { //SOMETHING to merge here: userid -> getdata, store 
 
 
     public void setLocation(Double longtitude, Double latitude) {
-        this.longtitude = longtitude;
+        this.longitude = longtitude;
         this.latitude = latitude;
     }
 
@@ -149,8 +145,8 @@ public class Conversation { //SOMETHING to merge here: userid -> getdata, store 
     }
 
     public LatLng getLatLng() {
-        if (this.longtitude != null && this.latitude != null)
-            return new LatLng(this.latitude, this.longtitude);
+        if (this.longitude != null && this.latitude != null)
+            return new LatLng(this.latitude, this.longitude);
         return null;
     }
 

@@ -566,7 +566,7 @@ public class MessageActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Conversation conver = dataSnapshot.getValue(Conversation.class);
-                                    if (conver.getLatitude() == 0 || conver.getLongtitude() == 0)
+                                    if (conver.getLatitude() == 0 || conver.getLongitude() == 0)
                                         Toast.makeText(MessageActivity.this, "Do not have the meeting", Toast.LENGTH_SHORT).show();
                                     else {
                                         intent.putExtra("mConverId", ID_User);
@@ -594,10 +594,11 @@ public class MessageActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Conversation conver = dataSnapshot.getValue(Conversation.class);
-                            if (conver.getLatitude() == 0 || conver.getLongtitude() == 0)
+                            if (conver.getLatitude() == 0 || conver.getLongitude() == 0)
                                 Toast.makeText(MessageActivity.this, "Do not have the meeting", Toast.LENGTH_SHORT).show();
                             else {
                                 intent.putExtra("mConverId", relativeLayout.getTag().toString());
+                                intent.putExtra("mFriendId", "");
                                 startActivity(intent);
                             }
                         }
