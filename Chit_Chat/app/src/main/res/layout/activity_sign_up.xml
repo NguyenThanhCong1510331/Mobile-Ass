@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background"
-    tools:context="com.example.group_32.chatloca.activities.Sign_upActivity">
+    tools:context="com.example.soundloneteamcomp.chitchat.activities.Sign_upActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

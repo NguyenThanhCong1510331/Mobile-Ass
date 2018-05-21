@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/background"
     android:theme="@style/Theme.AppCompat.NoActionBar"
-    tools:context="com.example.group_32.chatloca.activities.MessageActivity">
+    tools:context="com.example.soundloneteamcomp.chitchat.activities.MessageActivity">
 
     <LinearLayout
         android:id="@+id/linarelayout_Message"

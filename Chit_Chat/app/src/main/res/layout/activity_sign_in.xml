@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/sign_in"
+    android:background="@mipmap/chit_chat"
     android:theme="@style/Theme.AppCompat.NoActionBar"
-    tools:context="com.example.group_32.chatloca.activities.Sign_inActivity">
+    tools:context="com.example.soundloneteamcomp.chitchat.activities.Sign_inActivity">
 
     <RelativeLayout
         android:layout_width="fill_parent"
