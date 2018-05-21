@@ -109,7 +109,7 @@
             android:fontFamily="Roboto"
             android:text="@string/sign_in"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="#FFFFFFFF"
+            android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
         <com.google.android.gms.common.SignInButton
