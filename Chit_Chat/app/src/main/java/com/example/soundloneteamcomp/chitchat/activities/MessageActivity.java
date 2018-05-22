@@ -565,13 +565,13 @@ public class MessageActivity extends AppCompatActivity {
                             refMeeting.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    Conversation conver = dataSnapshot.getValue(Conversation.class);
-                                    if (conver.getLatitude() == 0 || conver.getLongitude() == 0)
-                                        Toast.makeText(MessageActivity.this, "Do not have the meeting", Toast.LENGTH_SHORT).show();
-                                    else {
-                                        intent.putExtra("mConverId", ID_User);
-                                        intent.putExtra("mFriendId", ID_Friend);
+//                                    Conversation conver = dataSnapshot.getValue(Conversation.class);
+                                    if (dataSnapshot.hasChild("latitude") && dataSnapshot.hasChild("longitude")) {
+                                        intent.putExtra("mConverId", ID_User + ID_Friend);
                                         startActivity(intent);
+                                    }
+                                    else {
+                                        Toast.makeText(MessageActivity.this, "Do not have the meeting", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -593,13 +593,13 @@ public class MessageActivity extends AppCompatActivity {
                     refMeeting.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            Conversation conver = dataSnapshot.getValue(Conversation.class);
-                            if (conver.getLatitude() == 0 || conver.getLongitude() == 0)
-                                Toast.makeText(MessageActivity.this, "Do not have the meeting", Toast.LENGTH_SHORT).show();
-                            else {
+//                            Conversation conver = dataSnapshot.getValue(Conversation.class);
+                            if (dataSnapshot.hasChild("latitude") && dataSnapshot.hasChild("longitude")) {
                                 intent.putExtra("mConverId", relativeLayout.getTag().toString());
-                                intent.putExtra("mFriendId", "");
                                 startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(MessageActivity.this, "Do not have the meeting", Toast.LENGTH_SHORT).show();
                             }
                         }
 

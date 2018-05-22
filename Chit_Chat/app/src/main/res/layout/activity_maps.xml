@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/name_layout"
-        tools:context="com.example.group_32.chatloca.activities.MapsActivity" />
+        tools:context="com.example.soundloneteamcomp.chitchat.activities.MapsActivity" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChatLoca</string>
+    <string name="app_name">ChitChat</string>
     <string name="title_activity_maps">Map</string>
     <string name="basic_profile">BASIC PROFILE</string>
     <string name="private_information">PRIVATE INFORMATION</string>

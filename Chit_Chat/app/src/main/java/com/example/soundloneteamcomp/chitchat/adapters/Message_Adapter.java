@@ -1,10 +1,5 @@
 package com.example.soundloneteamcomp.chitchat.adapters;
 
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,21 +9,14 @@ import android.widget.TextView;
 import com.example.soundloneteamcomp.chitchat.Messages;
 import com.example.soundloneteamcomp.chitchat.R;
 import com.example.soundloneteamcomp.chitchat.activities.ChatActivity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Message_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -38,7 +26,7 @@ public class Message_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int VIEW_TYPE_OTHER = 2;
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
-    private DatabaseReference UserDatabaseReference;
+    private DatabaseReference UserDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
     private List<Messages> userMessageList;
 
@@ -81,7 +69,7 @@ public class Message_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         Messages messages = userMessageList.get(position);
         myChatViewHolder.txtChatMessage.setText(messages.getMessage());
 
-        if(checkImageExist(userMessageList.get(position).getSenderId())) {
+        /*if(checkImageExist(userMessageList.get(position).getSenderId())) {
             //Toast.makeText(this, "EXIST", Toast.LENGTH_SHORT).show();
             Bitmap bitmap = loadImageFromStorage(userMessageList.get(position).getSenderId());
             myChatViewHolder.userProfile.setImageBitmap(bitmap);
@@ -114,14 +102,30 @@ public class Message_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             myChatViewHolder.userProfile.setImageResource(R.drawable.ic_user);
                         }
                     });
-        }
+        }*/
     }
 
     private void configureOtherChatViewHolder(final OtherChatViewHolder otherChatViewHolder, final int position) {
         Messages messages = userMessageList.get(position);
         otherChatViewHolder.txtChatMessage.setText(messages.getMessage());
 
-        if(checkImageExist(userMessageList.get(position).getSenderId())) {
+        UserDatabaseReference.child("User").child(messages.getSenderId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                    if (ds.getKey().equals("nameOfUser")) {
+                        otherChatViewHolder.userProfile.setText(ds.getValue().toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        /*if(checkImageExist(userMessageList.get(position).getSenderId())) {
             //Toast.makeText(this, "EXIST", Toast.LENGTH_SHORT).show();
             Bitmap bitmap = loadImageFromStorage(userMessageList.get(position).getSenderId());
             otherChatViewHolder.userProfile.setImageBitmap(bitmap);
@@ -154,7 +158,7 @@ public class Message_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             otherChatViewHolder.userProfile.setImageResource(R.drawable.ic_user);
                         }
                     });
-        }
+        }*/
     }
 
     @Override
@@ -176,30 +180,29 @@ public class Message_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private class MyChatViewHolder extends RecyclerView.ViewHolder {
         private TextView txtChatMessage;
-        private CircleImageView userProfile;
+        private TextView userProfile;
 
         public MyChatViewHolder(View itemView) {
             super(itemView);
             txtChatMessage = (TextView) itemView.findViewById(R.id.message_txt);
-            userProfile = (CircleImageView) itemView.findViewById(R.id.message_profile);
         }
     }
 
     private class OtherChatViewHolder extends RecyclerView.ViewHolder {
         private TextView txtChatMessage;
-        private CircleImageView userProfile;
+        private TextView userProfile;
 
         public OtherChatViewHolder(View itemView) {
             super(itemView);
             txtChatMessage = (TextView) itemView.findViewById(R.id.message_txt);
-            userProfile = (CircleImageView) itemView.findViewById(R.id.message_profile);
+            userProfile = (TextView) itemView.findViewById(R.id.message_profile);
         }
     }
 
-    private void saveToInternalStorage(Bitmap bitmap, String userId){
+    /*private void saveToInternalStorage(Bitmap bitmap, String userId){
         ContextWrapper contextWrapper = new ContextWrapper(context.getApplicationContext());
         // path to /data/data/your app/app_data/avatar
-        File directory = contextWrapper.getDir("avatar", Context.MODE_PRIVATE);
+        File directory = contextWrapper.getDir("avatar", android.content.Context.MODE_PRIVATE);
 
         // Create imageDir
         File mypath = new File(directory,userId + ".jpg");
@@ -245,5 +248,5 @@ public class Message_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 }

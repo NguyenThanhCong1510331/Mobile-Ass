@@ -17,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -31,7 +30,6 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
-import com.example.soundloneteamcomp.chitchat.Conversation;
 import com.example.soundloneteamcomp.chitchat.R;
 import com.example.soundloneteamcomp.chitchat.adapters.PlaceAutocompleteAdapter;
 import com.google.android.gms.common.ConnectionResult;
@@ -47,12 +45,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.places.AutocompletePrediction;
-import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
-import com.google.android.gms.location.places.PlaceDetectionClient;
 import com.google.android.gms.location.places.Places;
-import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -83,6 +78,8 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private final static int REQUEST_CHECK_SETTINGS_GPS=0x1;
     private static final int DEFAULT_ZOOM = 15;
+
+
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
             new LatLng(-40, -168), new LatLng(71, 136));
@@ -112,11 +109,11 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
 
     // ConversationId
     private String mConverId;
-    private String mFriendId;
 
     // market point
     private Marker mMarkerMeeting;
 
+    // show address location
     // show address location
     Geocoder geocoder;
 
@@ -157,8 +154,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
         super.onStart();
         Intent intent = getIntent();
         mConverId = intent.getStringExtra("mConverId");
-        mFriendId = intent.getStringExtra("mFriendId");
-        Log.d(TAG,"ID CONVER: "+ mConverId+ " Friend "+ mFriendId);
+        Log.d(TAG,"ID CONVER: "+ mConverId);
     }
     /**
      * Manipulates the map once available.
@@ -174,7 +170,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
         mMap = googleMap;
 
         if(mLocationPermissionGranted) {
-            getDeviceLocation();
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -182,6 +177,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            getDeviceLocation();
             init();
         }
     }
@@ -226,15 +222,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
             @Override
             public void onClick(View view) {
                 if(mLocationMeeting != null) {
-/*
-                    db.getReference("meeting").child(mConverId).child("longtitude").setValue(mLocationMeeting.longitude);
-                    db.getReference("meeting").child(mConverId).child("latitude").setValue(mLocationMeeting.latitude);
-                    if(mFriendId!= null){
-                        db.getReference("meeting").child(mFriendId).child("longtitude").setValue(mLocationMeeting.longitude);
-                        db.getReference("meeting").child(mFriendId).child("latitude").setValue(mLocationMeeting.latitude);
-                    }
-*/
-                    Log.d(TAG, "onCLick: SEt ROute");
+                    Log.d(TAG, "onCLick: send data back");
 
                     try {
                         List<Address> addresses = geocoder.getFromLocation(mLocationMeeting.latitude, mLocationMeeting.longitude, 1);
@@ -255,7 +243,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
         mRoute.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(mLocationMeeting!= null & mLastKnownLocation != null){
+                if(mLocationMeeting!= null && mLastKnownLocation != null){
                     setRoute();
                 }
             }
@@ -355,7 +343,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
                 builder.setAlwaysShow(true);
 
                 PendingResult result = LocationServices.SettingsApi
-                        .checkLocationSettings(mGoogleApiClient, builder.build());
+                                .checkLocationSettings(mGoogleApiClient, builder.build());
                 result.setResultCallback(new ResultCallback() {
                     @Override
                     public void onResult(@NonNull Result result) {
@@ -367,7 +355,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
                                 // You can initialize location requests here.
                                 int permissionLocation = ContextCompat
                                         .checkSelfPermission(MapsActivity.this,
-                                                android.Manifest.permission.ACCESS_FINE_LOCATION);
+                                                Manifest.permission.ACCESS_FINE_LOCATION);
                                 if (permissionLocation == PackageManager.PERMISSION_GRANTED) {
                                     final Task<Location> task= mFusedLocationProviderClient.getLastLocation();
                                     task.addOnSuccessListener(MapsActivity.this, new OnSuccessListener<Location>() {
@@ -410,7 +398,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
                 });
                 if(mLastKnownLocation!= null)
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(),
-                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
 
             }
             else { // to do: when not permission gps get db and show lastknowlocation
@@ -441,19 +429,19 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
         mapFragment.getMapAsync(MapsActivity.this);
     }
     private void getLocationPermission() {
-        /*
-         * Request location permission, so that we can get the location of the
-         * device. The result of the permission request is handled by a callback,
-         * onRequestPermissionsResult.
-         */
+    /*
+     * Request location permission, so that we can get the location of the
+     * device. The result of the permission request is handled by a callback,
+     * onRequestPermissionsResult.
+     */
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
             initMap();
         } else {
             ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
@@ -529,7 +517,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild("latitude") && dataSnapshot.hasChild("longitude")){
-                    mLocationMeeting = new LatLng ((Double) dataSnapshot.child("latitude").getValue(), (Double) dataSnapshot.child("longitude").getValue());
+                    markerMeeting(new LatLng ((Double) dataSnapshot.child("latitude").getValue(), (Double) dataSnapshot.child("longitude").getValue()));
                 }
             }
 
@@ -593,7 +581,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
     }
     @Override
     public void  onRoutingSuccess(ArrayList<Route> route,int shortestRouteIndex){
-        //        progressDialog.dismiss();
+       //        progressDialog.dismiss();
         CameraUpdate center = CameraUpdateFactory.newLatLng(mLocationMeeting);
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
 

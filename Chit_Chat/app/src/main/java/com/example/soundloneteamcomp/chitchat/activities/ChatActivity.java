@@ -12,11 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -57,6 +57,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private LinearLayoutManager linearLayoutManager;
     private Message_Adapter messageAdapter;
+    private ImageView btnSendMessage;
     private EditText editText;
     private Dialog myDialog;
     private Button btnSetApp, btnSetPos;
@@ -107,112 +108,146 @@ public class ChatActivity extends AppCompatActivity {
         fetchAppointment();
 
         editText = (EditText) findViewById(R.id.edtxt_Chat);
-        editText.setOnKeyListener(new View.OnKeyListener() {
+        editText.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER && !editText.getText().toString().equals("")) {
-                    final String messageText = editText.getText().toString();
-
-                    if (typeChat.equals("Friend Chat")) {
-                        String message_sender_ref = "friendChat/" + messageSenderId + "/" + messageReceiverId;
-                        String messgae_receiver_ref = "friendChat/" + messageReceiverId + "/" + messageSenderId;
-
-                        DatabaseReference user_message_key = rootRef.child("friendChat").child(messageSenderId).child(messageReceiverId).push();
-                        String messgae_push_id = user_message_key.getKey();
-
-                        Map messageBody = new HashMap();
-                        messageBody.put("message", messageText);
-                        messageBody.put("time", ServerValue.TIMESTAMP);
-                        messageBody.put("senderId", messageSenderId);
-
-                        Map messageBodyDetail = new HashMap();
-                        messageBodyDetail.put(message_sender_ref + "/" + messgae_push_id, messageBody);
-                        messageBodyDetail.put(messgae_receiver_ref + "/" + messgae_push_id, messageBody);
-
-                        rootRef.updateChildren(messageBodyDetail, new DatabaseReference.CompletionListener() {
-                            @Override
-                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                if (databaseError != null) {
-                                    Log.d("Chat_log", databaseError.getMessage().toString());
-                                }
+            public void onClick(View v) {
+                if (typeChat.equals("Friend Chat")) {
+                    rootRef.child("friendChat").child(messageSenderId).child(messageReceiverId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            long count = dataSnapshot.getChildrenCount();
+                            if (count != 0) {
+                                list_message.smoothScrollToPosition((int) count - 1);
                             }
-                        });
+                        }
 
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                        rootRef.child("friendChat").child(messageSenderId).child(messageReceiverId).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                long count = dataSnapshot.getChildrenCount();
-                                if (count != 0) {
-                                    list_message.smoothScrollToPosition((int) count - 1);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
-                    }
-                    else {
-                        rootRef.child("MemberInGroupID").child(messageReceiverId).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                for (DataSnapshot ds: dataSnapshot.getChildren()) {
-                                    String messageMemGroupId = ds.getKey();
-                                    String message_sender_ref = "groupChat/" + messageMemGroupId + "/" + messageReceiverId;
-
-                                    DatabaseReference user_message_key = rootRef.child("groupChat").child(messageMemGroupId).child(messageReceiverId).push();
-                                    String messgae_push_id = user_message_key.getKey();
-
-                                    Map messageBody = new HashMap();
-                                    messageBody.put("message", messageText);
-                                    messageBody.put("time", ServerValue.TIMESTAMP);
-                                    messageBody.put("senderId", messageSenderId);
-
-                                    Map messageBodyDetail = new HashMap();
-                                    messageBodyDetail.put(message_sender_ref + "/" + messgae_push_id, messageBody);
-
-                                    rootRef.updateChildren(messageBodyDetail, new DatabaseReference.CompletionListener() {
-                                        @Override
-                                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                            if (databaseError != null) {
-                                                Log.d("Chat_log", databaseError.getMessage().toString());
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
-                        rootRef.child("groupChat").child(messageSenderId).child(messageReceiverId).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                long count = dataSnapshot.getChildrenCount();
-                                if (count != 0) {
-                                    list_message.smoothScrollToPosition((int) count - 1);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
-                    }
-
-                    editText.setText("");
-
-                    return true;
+                        }
+                    });
                 }
-                return false;
+                else {
+                    rootRef.child("groupChat").child(messageSenderId).child(messageReceiverId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            long count = dataSnapshot.getChildrenCount();
+                            if (count != 0) {
+                                list_message.smoothScrollToPosition((int) count - 1);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+        btnSendMessage = (ImageView) findViewById(R.id.btn_send_message);
+        btnSendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String messageText = editText.getText().toString();
+
+                if (typeChat.equals("Friend Chat")) {
+                    String message_sender_ref = "friendChat/" + messageSenderId + "/" + messageReceiverId;
+                    String messgae_receiver_ref = "friendChat/" + messageReceiverId + "/" + messageSenderId;
+
+                    DatabaseReference user_message_key = rootRef.child("friendChat").child(messageSenderId).child(messageReceiverId).push();
+                    String messgae_push_id = user_message_key.getKey();
+
+                    Map messageBody = new HashMap();
+                    messageBody.put("message", messageText);
+                    messageBody.put("time", ServerValue.TIMESTAMP);
+                    messageBody.put("senderId", messageSenderId);
+
+                    Map messageBodyDetail = new HashMap();
+                    messageBodyDetail.put(message_sender_ref + "/" + messgae_push_id, messageBody);
+                    messageBodyDetail.put(messgae_receiver_ref + "/" + messgae_push_id, messageBody);
+
+                    rootRef.updateChildren(messageBodyDetail, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            if (databaseError != null) {
+                                Log.d("Chat_log", databaseError.getMessage().toString());
+                            }
+                        }
+                    });
+
+
+                    rootRef.child("friendChat").child(messageSenderId).child(messageReceiverId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            long count = dataSnapshot.getChildrenCount();
+                            if (count != 0) {
+                                list_message.smoothScrollToPosition((int) count - 1);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+                else {
+                    rootRef.child("MemberInGroupID").child(messageReceiverId).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                                String messageMemGroupId = ds.getKey();
+                                String message_sender_ref = "groupChat/" + messageMemGroupId + "/" + messageReceiverId;
+
+                                DatabaseReference user_message_key = rootRef.child("groupChat").child(messageMemGroupId).child(messageReceiverId).push();
+                                String messgae_push_id = user_message_key.getKey();
+
+                                Map messageBody = new HashMap();
+                                messageBody.put("message", messageText);
+                                messageBody.put("time", ServerValue.TIMESTAMP);
+                                messageBody.put("senderId", messageSenderId);
+
+                                Map messageBodyDetail = new HashMap();
+                                messageBodyDetail.put(message_sender_ref + "/" + messgae_push_id, messageBody);
+
+                                rootRef.updateChildren(messageBodyDetail, new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                        if (databaseError != null) {
+                                            Log.d("Chat_log", databaseError.getMessage().toString());
+                                        }
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    rootRef.child("groupChat").child(messageSenderId).child(messageReceiverId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            long count = dataSnapshot.getChildrenCount();
+                            if (count != 0) {
+                                list_message.smoothScrollToPosition((int) count - 1);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+
+                editText.setText("");
             }
         });
 
@@ -492,9 +527,9 @@ public class ChatActivity extends AppCompatActivity {
            public void onClick(View v) {
                 Intent intent = new Intent(ChatActivity.this, MapsActivity.class);
                 if (typeChat.equals("Friend Chat")) {
-                    Log.d(TAG,"ID SEND :"+messageReceiverId);
-                    intent.putExtra("mConverId", messageSenderId);
-                    intent.putExtra("mFriendId", messageReceiverId);
+                    Log.d(TAG,"ID SEND :"+messageSenderId +messageReceiverId);
+                    intent.putExtra("mConverId", messageSenderId +messageReceiverId);
+//                    intent.putExtra("mFriendId", messageReceiverId);
                 }
                 else {
                     Log.d(TAG,"ID SEND :"+messageReceiverId);
@@ -547,8 +582,8 @@ public class ChatActivity extends AppCompatActivity {
                         rootRef.child("meeting").child(messageReceiverId + messageSenderId).child("longitude").setValue(longitude);
                         rootRef.child("meeting").child(messageSenderId + messageReceiverId).child("latitude").setValue(latitude);
                         rootRef.child("meeting").child(messageReceiverId + messageSenderId).child("latitude").setValue(latitude);
-                        /*rootRef.child("meeting").child(messageSenderId + messageReceiverId).child("address").setValue(address);
-                        rootRef.child("meeting").child(messageReceiverId + messageSenderId).child("address").setValue(address);*/
+                        //rootRef.child("meeting").child(messageSenderId + messageReceiverId).child("address").setValue(address);
+                        //rootRef.child("meeting").child(messageReceiverId + messageSenderId).child("address").setValue(address);
                         rootRef.child("meeting").child(messageSenderId + messageReceiverId).child("latLng").child("longitude").setValue(longitude);
                         rootRef.child("meeting").child(messageSenderId + messageReceiverId).child("latLng").child("latitude").setValue(latitude);
                         rootRef.child("meeting").child(messageReceiverId + messageSenderId).child("latLng").child("longitude").setValue(longitude);
@@ -558,7 +593,7 @@ public class ChatActivity extends AppCompatActivity {
                         rootRef.child("meeting").child(messageReceiverId).child("latitude").setValue(latitude);
                         rootRef.child("meeting").child(messageReceiverId).child("latLng").child("longitude").setValue(longitude);
                         rootRef.child("meeting").child(messageReceiverId).child("latLng").child("latitude").setValue(latitude);
-                        //rootRef.child("meeting").child(messageSenderId).child("address").setValue(address);
+                        //rootRef.child("meeting").child(messageReceiverId).child("address").setValue(address);
                     }
                 }
                 myDialog.dismiss();

@@ -195,7 +195,7 @@ public class Database {
         final DatabaseReference group = chat.child(ID_UserCreate).push();
         group.setValue(conver);
         MemberInGroupID.child(group.getKey()).child(ID_UserCreate).setValue(mAuth.getCurrentUser().getDisplayName());
-        meetingRef.child(group.getKey()).setValue(new Conversation(ID_UserCreate, "", "", "", 0.0, 0.0));
+        meetingRef.child(group.getKey()).setValue(new Conversation(ID_UserCreate, "", "", ""));
         for (int i = 0; i < userName_Member.length; i++) {
             final int finalI = i;
             UserRefKey.child(userName_Member[i]).addListenerForSingleValueEvent(new ValueEventListener() {

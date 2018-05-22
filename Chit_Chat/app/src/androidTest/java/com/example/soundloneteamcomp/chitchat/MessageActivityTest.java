@@ -3,8 +3,6 @@ package com.example.soundloneteamcomp.chitchat;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.soundloneteamcomp.chitchat.activities.MessageActivity;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.soundloneteamcomp.chitchat.R;
 import com.example.soundloneteamcomp.chitchat.activities.ViewProfileActivity;
@@ -53,11 +54,11 @@ public class FriendRequestDialog extends AppCompatDialogFragment {
     private final String USERNAME = "userName";
     private final String MEETING = "meeting";
     private final String USER_ID_CREATED = "userIdCreated";
-    private final String TIME_MEETING = "timeMeeting";
+    private final String TIME = "time";
     private final String NAME_OF_MEETING = "nameOfMeeting";
     private final String LATITUDE = "latitude";
     private final String LONGITUDE = "longitude";
-    private final String DATE_MEETING = "dateMeeting";
+    private final String DATE = "date";
     private final String LATITUDE_LONGITUDE = "latLng";
 
     private Button btnClose;
@@ -75,7 +76,7 @@ public class FriendRequestDialog extends AppCompatDialogFragment {
         loadListFriendRequests();
 
         try {
-            Thread.sleep(400);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -131,11 +132,13 @@ public class FriendRequestDialog extends AppCompatDialogFragment {
 
     private class MyListAdapter extends ArrayAdapter<String>{
         private int layout;
+        private List<String> objects;
 
         public MyListAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
             super(context, resource, objects);
 
             layout = resource;
+            this.objects = objects;
         }
 
         @NonNull
@@ -160,6 +163,7 @@ public class FriendRequestDialog extends AppCompatDialogFragment {
 
             final String userId = getItem(position);
             final ViewHolder finalMainViewHolder = mainViewHolder;
+
             FirebaseDatabase.getInstance()
                     .getReference(USER)
                     .child(userId)
@@ -201,7 +205,6 @@ public class FriendRequestDialog extends AppCompatDialogFragment {
                             // ...
                         }
                     });
-
 
             //  Event Accept / Delete
             final ViewHolder finalMainViewHolder1 = mainViewHolder;
@@ -286,7 +289,20 @@ public class FriendRequestDialog extends AppCompatDialogFragment {
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .removeValue();
 
+
+                    int length = arrayList.size();
+                    Toast.makeText(getContext(), String.valueOf(length), Toast.LENGTH_LONG).show();
                     arrayList.remove(position);
+                    ArrayList<String> newArrayList = new ArrayList<>();
+                    for(String s: arrayList){
+                        newArrayList.add(s);
+                    }
+                    arrayList.clear();
+                    myListAdapter.notifyDataSetChanged();
+
+                    for(String s: newArrayList){
+                        arrayList.add(s);
+                    }
                     myListAdapter.notifyDataSetChanged();
 //                    myListAdapter.notify();
                 }
@@ -312,24 +328,24 @@ public class FriendRequestDialog extends AppCompatDialogFragment {
     public void addMeeting(String userId1, String userId2){
         Map<String, Object> meetingUser = new HashMap<>();
         meetingUser.put(USER_ID_CREATED, userId1);
-        meetingUser.put(TIME_MEETING, "");
-        meetingUser.put(NAME_OF_MEETING, "");
+        meetingUser.put(TIME, "");
+        meetingUser.put(NAME_OF_MEETING, "");/*
         meetingUser.put(LATITUDE, 0.0);
-        meetingUser.put(LONGITUDE, 0.0);
-        meetingUser.put(DATE_MEETING, "");
+        meetingUser.put(LONGITUDE, 0.0);*/
+        meetingUser.put(DATE, "");
 
-        Map<String, Object> latLng = new HashMap<>();
+/*        Map<String, Object> latLng = new HashMap<>();
         latLng.put(LATITUDE, 0.0);
-        latLng.put(LONGITUDE, 0.0);
+        latLng.put(LONGITUDE, 0.0);*/
 
         FirebaseDatabase.getInstance()
                 .getReference(MEETING)
                 .child(userId1 + userId2)
                 .setValue(meetingUser);
-        FirebaseDatabase.getInstance()
+/*        FirebaseDatabase.getInstance()
                 .getReference(MEETING)
                 .child(userId1 + userId2)
                 .child(LATITUDE_LONGITUDE)
-                .setValue(latLng);
+                .setValue(latLng);*/
     }
 }

@@ -35,12 +35,11 @@ public class Conversation { //SOMETHING to merge here: userid -> getdata, store 
         this.latitude = latitude;
     }
 
-    public Conversation(String userIdCreated, Long timeCreated, String conversationName, Map<String, String> listMember, Map<Messages, Object> listMessage) {
+    public Conversation(String userIdCreated, String nameOfMeeting, String date, String time) {
         this.userIdCreated = userIdCreated;
-        this.timeCreated = timeCreated;
-        this.conversationName = conversationName;
-        this.listMember = listMember;
-        this.listMessage = listMessage;
+        this.nameOfMeeting = nameOfMeeting;
+        this.date = date;
+        this.time = time;
     }
 
     public Double getLongitude() {

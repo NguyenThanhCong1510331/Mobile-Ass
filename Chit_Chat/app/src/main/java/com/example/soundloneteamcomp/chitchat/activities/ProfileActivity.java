@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.soundloneteamcomp.chitchat.Database;
-import com.example.soundloneteamcomp.chitchat.User;
+import com.example.soundloneteamcomp.chitchat.R;
 import com.example.soundloneteamcomp.chitchat.dialogs.ChangeAvatarDialog;
 import com.example.soundloneteamcomp.chitchat.dialogs.EditPasswordDialog;
 import com.example.soundloneteamcomp.chitchat.dialogs.EditPhoneDialog;
-
 import com.example.soundloneteamcomp.chitchat.dialogs.FriendRequestDialog;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -32,16 +29,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import com.example.soundloneteamcomp.chitchat.R;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -53,11 +44,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDialog.ChangeAvatarDialogListener, EditPhoneDialog.EditPhoneDialogListener, EditPasswordDialog.EditPasswordDialogListener{
     private final String USER = "User";
@@ -244,7 +230,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 1, baos); //Anh modify quality 100 downto 25
+        bitmap.compress(CompressFormat.JPEG, 1, baos); //Anh modify quality 100 downto 25
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = storageRef
@@ -322,7 +308,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
         try {
             fos = new FileOutputStream(mypath);
             // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            bitmap.compress(CompressFormat.PNG, 100, fos);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
