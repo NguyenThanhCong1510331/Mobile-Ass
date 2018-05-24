@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,10 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.soundloneteamcomp.chitchat.R;
 import com.example.soundloneteamcomp.chitchat.dialogs.ChangeAvatarDialog;
 import com.example.soundloneteamcomp.chitchat.dialogs.EditPasswordDialog;
 import com.example.soundloneteamcomp.chitchat.dialogs.EditPhoneDialog;
+
 import com.example.soundloneteamcomp.chitchat.dialogs.FriendRequestDialog;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -29,6 +28,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import com.example.soundloneteamcomp.chitchat.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -65,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
     private ImageView imgAvatar, imgFriendRequest;
 
     private FirebaseAuth mAuth;
-    public static boolean makeFriend; // Anh modified
+    public static boolean hasChange; // Anh modified
     // TN
     private String password;
 
@@ -77,7 +78,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
         setContentView(R.layout.activity_profile);
         mapping();
 
-        makeFriend = false;
+        hasChange = false;
         mAuth = FirebaseAuth.getInstance();
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -93,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
         btnCallActivityBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!makeFriend)
+                if(!hasChange)
                     finish();
                 else {
                     Intent intent = new Intent(ProfileActivity.this, MessageActivity.class);
@@ -154,7 +155,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
     @Override // Anh modified
     public void onBackPressed() {
         super.onBackPressed();
-        if(!makeFriend)
+        if(!hasChange)
             finish();
         else {
             Intent intent = new Intent(ProfileActivity.this, MessageActivity.class);
@@ -246,7 +247,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(CompressFormat.JPEG, 1, baos); //Anh modify quality 100 downto 25
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 1, baos); //Anh modify quality 100 downto 25
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = storageRef
@@ -266,6 +267,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
             }
         });
         saveToInternalStorage(bitmap, mAuth.getUid());
+        hasChange = true;
     }
 
     @Override
@@ -324,7 +326,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
         try {
             fos = new FileOutputStream(mypath);
             // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmap.compress(CompressFormat.PNG, 100, fos);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -271,7 +271,7 @@ public class FriendRequestDialog extends AppCompatDialogFragment {
 
                     addMeeting(userId, FirebaseAuth.getInstance().getCurrentUser().getUid());
                     addMeeting(FirebaseAuth.getInstance().getCurrentUser().getUid(), userId);
-                    ProfileActivity.makeFriend = true; // Anh modified
+                    ProfileActivity.hasChange = true; // Anh modified
                     finalMainViewHolder1.btnDelete.performClick();
                 }
             });
