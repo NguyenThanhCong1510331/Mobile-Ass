@@ -18,14 +18,6 @@ public class User {
 
     public User(){}
 
-    public String getDateofbirth() {
-        return dateofbirth;
-    }
-
-    public void setDateofbirth(String dateofbirth) {
-        this.dateofbirth = dateofbirth;
-    }
-
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
@@ -50,11 +42,22 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
     public boolean checkUser(User newUser){
         if (this.userName == newUser.userName&& this.password == newUser.password)
             return true;
         return false;
     }
+
+    public String getDateofbirth() {
+        return dateofbirth;
+    }
+
+    public void setDateofbirth(String dateofbirth) {
+        this.dateofbirth = dateofbirth;
+    }
+
+
 
     public String getFirstName() {
         return firstName;

@@ -84,6 +84,7 @@ public class Sign_upActivity extends BaseActivity {
         textvSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish(); // Anh modified
                 Intent intent = new Intent(Sign_upActivity.this,Sign_inActivity.class);
                 startActivity(intent);
             }
@@ -251,7 +252,7 @@ public class Sign_upActivity extends BaseActivity {
                     hideProgressDialog();
                     Toast.makeText(Sign_upActivity.this, "Authentication success.", Toast.LENGTH_SHORT).show();
 
-
+                    finish(); // Anh modified
                     Intent intent = new Intent(Sign_upActivity.this, Sign_inActivity.class);
                     startActivity(intent);
                 }

@@ -517,7 +517,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.C
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild("latitude") && dataSnapshot.hasChild("longitude")){
-                    markerMeeting(new LatLng ((Double) dataSnapshot.child("latitude").getValue(), (Double) dataSnapshot.child("longitude").getValue()));
+                    markerMeeting(new LatLng ((double) dataSnapshot.child("latitude").getValue(), (double) dataSnapshot.child("longitude").getValue()));
                 }
             }
 

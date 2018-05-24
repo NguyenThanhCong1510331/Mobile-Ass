@@ -108,6 +108,46 @@ public class ChatActivity extends AppCompatActivity {
         fetchAppointment();
 
         editText = (EditText) findViewById(R.id.edtxt_Chat);
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    if (typeChat.equals("Friend Chat")) {
+                        rootRef.child("friendChat").child(messageSenderId).child(messageReceiverId).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                long count = dataSnapshot.getChildrenCount();
+                                if (count != 0) {
+                                    list_message.smoothScrollToPosition((int) count - 1);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                    else {
+                            rootRef.child("groupChat").child(messageSenderId).child(messageReceiverId).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    long count = dataSnapshot.getChildrenCount();
+                                    if (count != 0) {
+                                        list_message.smoothScrollToPosition((int) count - 1);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                    }
+                }
+            }
+        });
+
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,8 +304,7 @@ public class ChatActivity extends AppCompatActivity {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChatActivity.this, MessageActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }

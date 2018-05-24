@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.soundloneteamcomp.chitchat.R;
+import com.example.soundloneteamcomp.chitchat.activities.ProfileActivity;
 import com.example.soundloneteamcomp.chitchat.activities.ViewProfileActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -270,7 +271,7 @@ public class FriendRequestDialog extends AppCompatDialogFragment {
 
                     addMeeting(userId, FirebaseAuth.getInstance().getCurrentUser().getUid());
                     addMeeting(FirebaseAuth.getInstance().getCurrentUser().getUid(), userId);
-
+                    ProfileActivity.makeFriend = true; // Anh modified
                     finalMainViewHolder1.btnDelete.performClick();
                 }
             });

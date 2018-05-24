@@ -57,6 +57,8 @@ public class MessageActivity extends AppCompatActivity {
     private ScrollView scrollViewAddFriend;
     private TextView tvNameMessage;
     private de.hdodenhof.circleimageview.CircleImageView circleImageAvatar;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
     int id = 0;
     int idAddUser = 0;
 
@@ -64,11 +66,10 @@ public class MessageActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-
         this.mapping();
 
         setUserNameToLayout();
-        setAvatar(FirebaseAuth.getInstance().getCurrentUser().getUid(), circleImageAvatar);
+        setAvatar(mAuth.getCurrentUser().getUid(), circleImageAvatar);
 
         imgvCallActivityProfile = findViewById(R.id.image_avatar);
         imgvCallActivityProfile.setOnClickListener(new View.OnClickListener() {
@@ -384,7 +385,6 @@ public class MessageActivity extends AppCompatActivity {
                     final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
                     final String username = mAuth.getCurrentUser().getDisplayName();
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference ref = database.getReference("User");
 
                     ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -465,8 +465,6 @@ public class MessageActivity extends AppCompatActivity {
 
     public void SettingFriendChat() {
         // chat view
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final String ID_User = mAuth.getCurrentUser().getUid();
         int i = id - 1;
         final RelativeLayout relativeLayout = findViewById(R.id.ChatFriend + i);
@@ -569,8 +567,7 @@ public class MessageActivity extends AppCompatActivity {
                                     if (dataSnapshot.hasChild("latitude") && dataSnapshot.hasChild("longitude")) {
                                         intent.putExtra("mConverId", ID_User + ID_Friend);
                                         startActivity(intent);
-                                    }
-                                    else {
+                                    } else {
                                         Toast.makeText(MessageActivity.this, "Do not have the meeting", Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -597,8 +594,7 @@ public class MessageActivity extends AppCompatActivity {
                             if (dataSnapshot.hasChild("latitude") && dataSnapshot.hasChild("longitude")) {
                                 intent.putExtra("mConverId", relativeLayout.getTag().toString());
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(MessageActivity.this, "Do not have the meeting", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -655,7 +651,6 @@ public class MessageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final Intent intent = new Intent(MessageActivity.this, ViewProfileActivity.class);
                 final String userName_other = relativeLayout.getTag().toString();
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference refUserKey = database.getReference("userKey").child(userName_other);
                 refUserKey.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -674,9 +669,6 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     public void setUserNameToLayout() {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        if (mAuth == null) return;
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.getReference("User").child(mAuth.getCurrentUser().getUid()).child("nameOfUser").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -690,8 +682,6 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     public void LoadRequestedFriend() {
-        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         String id_user = mAuth.getCurrentUser().getUid();
         if (id_user == null) return;
         DatabaseReference ref = database.getReference("senderRequestFriend").child(id_user);
@@ -728,8 +718,6 @@ public class MessageActivity extends AppCompatActivity {
 
     public void LoadFriendList() {
         // LoadFriend create friend chat
-        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         String Username = mAuth.getCurrentUser().getDisplayName();
         final String ID_User = mAuth.getCurrentUser().getUid();
         if (Username == null) return;
@@ -748,10 +736,6 @@ public class MessageActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 User FriendInfo = dataSnapshot.getValue(User.class);
-//                    FirebaseStorage storage = FirebaseStorage.getInstance();
-//                    StorageReference httpsReference = storage.getReferenceFromUrl(FriendInfo.getAvatarURL());
-//                    ImageView imageView=new ImageView(MessageActivity.this);
-//                    Glide.with(MessageActivity.this).using(new FirebaseImageLoader()).load(httpsReference).into(imageView);
                                 createChatView(UserName_Other, ID_Other, FriendInfo.getNameOfUser(), conversation.getType());
                                 SettingFriendChat();
                             }

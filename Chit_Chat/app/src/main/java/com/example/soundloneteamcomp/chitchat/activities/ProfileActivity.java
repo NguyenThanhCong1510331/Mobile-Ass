@@ -65,7 +65,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
     private ImageView imgAvatar, imgFriendRequest;
 
     private FirebaseAuth mAuth;
-
+    public static boolean makeFriend; // Anh modified
     // TN
     private String password;
 
@@ -77,6 +77,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
         setContentView(R.layout.activity_profile);
         mapping();
 
+        makeFriend = false;
         mAuth = FirebaseAuth.getInstance();
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -92,8 +93,12 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
         btnCallActivityBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, MessageActivity.class);
-                startActivity(intent);
+                if(!makeFriend)
+                    finish();
+                else {
+                    Intent intent = new Intent(ProfileActivity.this, MessageActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -101,7 +106,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
             @Override
             public void onClick(View view) {
                 signOut();
-
+                finish(); // Anh modified
                 Intent intent = new Intent(ProfileActivity.this,Sign_inActivity.class);
                 startActivity(intent);
             }
@@ -144,6 +149,17 @@ public class ProfileActivity extends AppCompatActivity implements ChangeAvatarDi
     @Override
     protected void onStart(){
         super.onStart();
+    }
+
+    @Override // Anh modified
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(!makeFriend)
+            finish();
+        else {
+            Intent intent = new Intent(ProfileActivity.this, MessageActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void signOut(){

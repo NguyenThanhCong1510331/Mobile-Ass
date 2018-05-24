@@ -96,6 +96,7 @@ public class Sign_inActivity extends BaseActivity implements
     public void updateUI(FirebaseUser user){
         hideProgressDialog();
         if (user != null) {
+            finish(); // Anh modified
             Intent intent = new Intent(Sign_inActivity.this, MessageActivity.class);
             startActivity(intent);
         }
