@@ -373,7 +373,7 @@ public class MessageActivity extends AppCompatActivity {
                     for (int i = 0; i < id; i++) {
                         RelativeLayout relativeLayout = findViewById(R.id.ChatFriend + i);
                         TextView textViewUsername = findViewById(i);
-                        if (textViewUsername.getText().toString().indexOf(query) == -1)
+                        if (textViewUsername.getText().toString().indexOf(query) == -1 && relativeLayout.getTag().toString().indexOf(query) == -1)
                             relativeLayout.setVisibility(View.GONE);
                         else relativeLayout.setVisibility(View.VISIBLE);
                     }
@@ -394,7 +394,7 @@ public class MessageActivity extends AppCompatActivity {
                                 final User user = db.getValue(User.class);
                                 final String ID_user = db.getKey();
                                 if (!user.getUserName().equals(username)) {
-                                    if (user.getUserName().indexOf(query) != -1) {
+                                    if (user.getUserName().indexOf(query) != -1 || user.getNameOfUser().indexOf(query) != -1) {
                                         boolean isExist = false;
                                         for (int i = 0; i < idAddUser; i++) {
                                             RelativeLayout relativeLayout = findViewById(R.id.RelativeLAddFriend + i);
@@ -448,7 +448,8 @@ public class MessageActivity extends AppCompatActivity {
                             }
                             for (int i = 0; i < idAddUser; i++) {
                                 RelativeLayout relativeLayout = findViewById(R.id.RelativeLAddFriend + i);
-                                if (relativeLayout.getTag().toString().indexOf(query) == -1)
+                                TextView textViewAddFriend = findViewById(R.id.txtAddFriend + i);
+                                if (relativeLayout.getTag().toString().indexOf(query) == -1 && textViewAddFriend.getText().toString().indexOf(query) == -1)
                                     relativeLayout.setVisibility(View.GONE);
                                 else relativeLayout.setVisibility(View.VISIBLE);
                             }
