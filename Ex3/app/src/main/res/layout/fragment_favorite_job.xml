@@ -7,23 +7,11 @@
     tools:context=".Fragment.FavoriteFragment"
     >
 
-    <TextView
-        android:id="@+id/FavoriteList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_alignParentStart="true"
-
-        android:textStyle="bold"
-        android:textColor="@color/colorWhite"
-        android:textSize="24sp"
-        android:gravity="center"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvFavoriteList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbarSize="10dp"
-        android:layout_below="@+id/FavoriteList"
         android:layout_alignParentBottom="true"
         android:scrollbarThumbVertical="@drawable/custom_scroll"
         android:divider="@drawable/custom_divider"/>

@@ -18,9 +18,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:textColorHint="@color/colorWhite"
-            android:backgroundTint="@color/colorWhite"
-            android:textColor="@color/colorWhite"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimaryDark"
             />
 
         <Button

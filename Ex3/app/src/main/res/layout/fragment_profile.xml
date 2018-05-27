@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_marginTop="30dp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/position_hint"/>
     <EditText
         android:id="@+id/edtPosition"
@@ -20,8 +20,8 @@
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:hint="@string/enter_position"
-        android:textColor="@color/colorWhite"
-        android:backgroundTint="@color/colorWhite"
+        android:textColor="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:textColorHint="@color/yellow"
         android:layout_height="wrap_content" />
     <TextView
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_marginTop="30dp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/location_hint"/>
     <EditText
         android:id="@+id/edtLocation"
@@ -41,7 +41,7 @@
         android:hint="@string/enter_location"
         android:textColor="@color/colorWhite"
         android:layout_marginTop="15dp"
-        android:backgroundTint="@color/colorWhite"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:textColorHint="@color/yellow"
         android:layout_height="wrap_content" />
     <TextView
@@ -51,14 +51,14 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_marginTop="30dp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/schedule_hint"/>
     <Spinner
         android:id="@+id/spinnerSchedule"
         android:layout_toEndOf="@+id/txtHintSchedule"
         android:layout_below="@id/edtLocation"
         android:layout_width="wrap_content"
-        android:backgroundTint="@color/colorWhite"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:minHeight="30dp"
         android:hint="@string/enter_location"
         android:dropDownWidth="wrap_content"

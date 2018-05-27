@@ -27,7 +27,6 @@ public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-
             return new HomeFragment();
         } else if (position == 1) {
             return new SearchFragment();
@@ -50,16 +49,13 @@ public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
         // Generate title based on item position
         switch (position) {
             case 0:
-                //return mContext.getString(R.string.category_usefulinfo);
                 return "Home";
             case 1:
-                //return mContext.getString(R.string.category_usefulinfo);
                 return "Search";
             case 2:
-                //return mContext.getString(R.string.category_places);
                 return "Favorite Job";
             case 3:
-                return "Profile";
+                return "Some Criterias";
             default:
                 return null;
         }

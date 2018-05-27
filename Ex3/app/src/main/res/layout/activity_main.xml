@@ -5,27 +5,15 @@
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF299CE9"
+    android:background="#ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
-
-
-    <android.support.design.widget.AppBarLayout
+    
+    <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <TextView
-            android:id="@+id/txtTab"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Home"
-            android:textColor="@color/colorWhite"
-            android:textSize="28sp"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:background="#299ce9"
-            android:textStyle="bold"
-            />
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="50dp"
+        android:id="@+id/ntb_horizontal"
+        android:background="#ff8f20"></android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_horizontal_ntb"
@@ -33,19 +21,6 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <devlight.io.library.ntb.NavigationTabBar
-        android:id="@+id/ntb_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        app:ntb_badge_size="1sp"
-        app:ntb_badge_bg_color="#ffff0000"
-        app:ntb_badge_gravity="top"
-        app:ntb_badge_position="left"
-        app:ntb_badge_title_color="#ffffffff"
-        app:ntb_badge_use_typeface="true"
-        app:ntb_badged="true"
-        app:ntb_typeface="fonts/agency.ttf"/>
 
 
 
